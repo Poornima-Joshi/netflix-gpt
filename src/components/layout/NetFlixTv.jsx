@@ -20,7 +20,7 @@ const NetFlixTv = () => {
             color="#fff"
             px={2}
             sx={{
-              fontWeight: "bolder",
+              
               textAlign: { xs: "center", md: "start" },
               fontSize: { xs: "2rem", md: "3rem" },
               fontWeight: { xs: "700", md: "900" },
@@ -34,7 +34,7 @@ const NetFlixTv = () => {
             px={2}
             color="#fff"
             sx={{
-              fontWeight: "bolder",
+              
               textAlign: { xs: "center", md: "start" },
               fontSize: { xs: "1.125rem", lg: "1.5rem" },
               fontWeight: "400",

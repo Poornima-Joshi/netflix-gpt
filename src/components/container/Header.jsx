@@ -6,8 +6,16 @@ import {
   Typography,
 } from "@mui/material";
 import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleSignIn = () =>{
+    navigate("/login");
+  }
+
   return (
     <AppBar
       component="nav"
@@ -33,7 +41,7 @@ const Header = () => {
           />
         </Typography>
         <Box>
-          <Button variant="contained" color="error" size="small">Sign In</Button>
+          <Button variant="contained" color="error" size="small" onClick={handleSignIn}>Sign In</Button>
         </Box>
       </Toolbar>
     </AppBar>

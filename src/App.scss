@@ -1,2 +1,23 @@
 @import url(./sass/main.scss);
+@import "./sass/variable";
+@import "./sass/mixin";
 
+.login-form {
+  background-color: black;
+  opacity: 0.8;
+  border-radius:5px;
+
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    color: $white;
+    padding: 13.5px 14px;
+    background: rgb(225 209 209 / 47%);
+    border-radius: 4px;
+    &:focus{
+        background:#333;
+        padding: 13.5px 14px;
+    }
+  }
+  .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    color: $white;
+  }
+}

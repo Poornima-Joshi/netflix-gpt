@@ -11,7 +11,7 @@ import NetflixAccordion from "../layout/NetflixAccordion";
 const Main = () => {
   return (
     <>
-     <Grid className="netflix-banner">
+     <Grid className="netflix-banner border-bottom">
       <Grid className="netflix-bg">
         <Grid container item xs={12} px={2} lg={10} mx="auto">
           <Header/>

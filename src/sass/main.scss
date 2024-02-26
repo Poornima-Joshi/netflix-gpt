@@ -5,7 +5,8 @@
   @include netflixLayout;
   background-image: url($BANNER_URL);
   background-size: cover;
-  border-bottom: 12px solid rgb(35, 35, 35);
+  background-color:black;
+  
 
   .netflix-bg {
     @include netflixLayout;
