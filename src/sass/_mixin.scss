@@ -1,0 +1,13 @@
+@import "variable";
+
+
+@mixin netflixLayout{
+    height:$h-screen;
+    width:$w-full;
+}
+
+@mixin flexproperty{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
