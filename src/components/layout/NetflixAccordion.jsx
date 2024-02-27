@@ -12,7 +12,7 @@ const NetflixAccordion = () => {
   const [expanded, setExpanded] = useState(false);
   const Data = accordionData;
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -77,7 +77,7 @@ const NetflixAccordion = () => {
                {item.defination[1]}
               </Typography>
             </AccordionDetails>
-          </Accordion>
+            </Accordion>
           ))
         }
         
