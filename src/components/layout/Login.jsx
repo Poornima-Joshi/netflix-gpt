@@ -1,7 +1,10 @@
-import { Button, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Button, Grid,Typography} from "@mui/material";
 import LoginHeader from "../container/LoginHeader";
 import { useState, useRef, useEffect } from "react";
 import { checkSignInData,checkSignUpData } from "../../utils/validate";
+import { MyStyledTextField } from "../../utils/customStyled";
+
+
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -19,17 +22,12 @@ const Login = () => {
   const password = useRef(null);
 
   useEffect(() => {
-    // For name error
-    console.log(errorMessage.nameError);
-  
-    // For email error
-    console.log(errorMessage.emailError);
-  
-    // For password error
-    console.log(errorMessage.passwordError);
   }, [errorMessage]);
 
   const handleButtonClick = () => {
+    console.log(name);
+    console.log(password.current.value);
+    console.log(email.current.value);
     const message = isSignInForm
       ? checkSignInData(email.current.value, password.current.value)
       : checkSignUpData(
@@ -53,6 +51,24 @@ const Login = () => {
     
   };
 
+  // const MyStyledTextField = {
+  //   '& .MuiInputBase-input': {
+  //   color: '#fff',
+  //   padding: '13.5px 14px',
+  //   background: 'rgb(158 143 143 / 47%)',
+  //   borderRadius: '4px',
+  //   '&:focus': {
+  //     background:"#333", // Focus par background color
+  //   },
+  //   },
+  //   '& .MuiInputLabel-root': {
+  //     color: '#fff',
+  //   },
+  //   '& .MuiFormHelperText-root': {
+  //     color: 'red',
+  //   },
+  // };
+  
   return (
     <>
       <Grid className="netflix-banner">
@@ -64,45 +80,47 @@ const Login = () => {
                 <Typography variant="h4" color="#fff" mb={2}>
                   {isSignInForm ? "Sign In" : "Sign Up"}
                 </Typography>
-                <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={(e) => e.preventDefault()}>
                   {!isSignInForm && (
-                    <Typography mb={2}>
-                      <TextField
+                    <Grid mb={2}>
+                      <MyStyledTextField
                         type="text"
-                        id="name"
                         label="Name"
                         fullWidth
                         variant="outlined"
                         inputRef={name}
                         helperText={errorMessage.nameError}
+                       
                       />
-                    </Typography>
+                    </Grid>
                   )}
 
-                  <Typography mb={2}>
-                    <TextField
+                  <Grid mb={2}>
+                    <MyStyledTextField
                       type="text"
-                      id="email"
+                      
                       label="Email"
                       fullWidth
                       variant="outlined"
                       inputRef={email}
                       helperText={errorMessage.emailError}
+                      
                     />
-                  </Typography>
-                  <Typography mb={2}>
-                    <TextField
+                  </Grid>
+                  <Grid mb={2}>
+                    <MyStyledTextField
                       type="password"
-                      id="password"
                       label="Password"
                       fullWidth
                       variant="outlined"
                       inputRef={password}
                       helperText={errorMessage.passwordError}
+                      
                     />
-                  </Typography>
+                  </Grid>
 
                   <Button
+                    type="button"
                     variant="contained"
                     sx={{
                       background: "red",

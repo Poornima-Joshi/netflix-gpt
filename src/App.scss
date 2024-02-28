@@ -7,27 +7,40 @@
   opacity: 0.8;
   border-radius:5px;
 
-  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-    color: $white;
-    padding: 13.5px 14px;
-    // background: rgb(225 209 209 / 47%);
-    background: rgb(158 143 143 / 47%);
-    // background:#333;
-    border-radius: 4px;
-    &:focus{
-        background:#333;
-        padding: 13.5px 14px;
-    }
-  }
-  .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
-    color: $white;
-  }
-  .css-1wc848c-MuiFormHelperText-root{
-    color:red;
-  }
-  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
-    // color:#1976d2;
-    color:$white;
-    font-weight:bold;
-  }
+  // .css-1x5jdmq{
+  //   color: $white;
+  //   padding: 13.5px 14px;
+  //   // background: rgb(225 209 209 / 47%);
+  //   background: rgb(158 143 143 / 47%);
+  //   // background:#333;
+  //   border-radius: 4px;
+  //   &:focus{
+  //       background:#333;
+  //       padding: 13.5px 14px;
+  //   }
+  // }
+
+  // .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  //   color: $white;
+  //   padding: 13.5px 14px;
+  //   // background: rgb(225 209 209 / 47%);
+  //   background: rgb(158 143 143 / 47%);
+  //   // background:#333;
+  //   border-radius: 4px;
+  //   &:focus{
+  //       background:#333;
+  //       padding: 13.5px 14px;
+  //   }
+  // }
+  // .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  //   color: $white;
+  // }
+  // .css-1wc848c-MuiFormHelperText-root{
+  //   color:red;
+  // }
+  // .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+  //   // color:#1976d2;
+  //   color:$white;
+  //   font-weight:bold;
+  // }
 }
