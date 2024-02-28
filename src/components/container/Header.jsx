@@ -2,11 +2,13 @@ import {
   AppBar,
   Box,
   Button,
+  Grid,
   Toolbar,
   Typography,
 } from "@mui/material";
-import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
+import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+
 
 
 const Header = () => {
@@ -28,21 +30,24 @@ const Header = () => {
           color="#ec0707"
           sx={{
             wordSpacing: "-5px",
-            fontSize: { xs: "1.5rem", sm: "2rem" },
+            fontSize: { xs: "1.5rem", md: "1.7rem" },
             fontWeight: "bold",
           }}
         >
           NETFLIX GPT
         </Typography>
-        <Typography flexGrow={1} mx={1.} mt={1} color="#ec0707">
-          <ImportantDevicesIcon
-           sx={{fontSize: { xs: "1.5rem", sm: "2rem"}}}
+        <Typography flexGrow={1} mx={1}  color="#ec0707">
+          <AdbIcon
+           sx={{fontSize: { xs: "1.5rem", md: "1.7rem"}}}
             
           />
         </Typography>
-        <Box>
+         
+         <Grid>
           <Button variant="contained" color="error" size="small" onClick={handleSignIn}>Sign In</Button>
-        </Box>
+        </Grid>
+        
+         
       </Toolbar>
     </AppBar>
   );

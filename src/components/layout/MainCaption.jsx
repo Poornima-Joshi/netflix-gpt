@@ -13,7 +13,7 @@ const MainCaption = () => {
             fontWeight:{xs:"700",  md:"900"}
             }}
           >
-            Unlimited movies
+            Unlimited movies, TV shows and more
           </Typography>
           <Typography
             variant="body1"

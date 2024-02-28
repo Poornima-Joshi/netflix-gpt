@@ -1,33 +1,41 @@
-import { Button, Grid,Typography} from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import LoginHeader from "../container/LoginHeader";
 import { useState, useRef, useEffect } from "react";
-import { checkSignInData,checkSignUpData } from "../../utils/validate";
+import { checkSignInData, checkSignUpData } from "../../utils/validate";
 import { MyStyledTextField } from "../../utils/customStyled";
-
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [firebaseErrorMsg, setFireBaseErrorMsg] = useState("");
   const [errorMessage, setErrorMessage] = useState({
     nameError: "",
     emailError: "",
     passwordError: "",
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const toggleSignInForm = () => {
-    setIsSignInForm(!isSignInForm);
-  };
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
-  useEffect(() => {
-  }, [errorMessage]);
+  const toggleSignInForm = () => {
+    setIsSignInForm(!isSignInForm);
+    setFireBaseErrorMsg("");
+  };
+
+  useEffect(() => {}, [errorMessage]);
 
   const handleButtonClick = () => {
-    console.log(name);
-    console.log(password.current.value);
-    console.log(email.current.value);
     const message = isSignInForm
       ? checkSignInData(email.current.value, password.current.value)
       : checkSignUpData(
@@ -47,37 +55,99 @@ const Login = () => {
         ? message.find((item) => item.field === "password")?.message || ""
         : "",
     });
+    if (message) return;
 
-    
+    //sign-In/sign-Up logic
+    if (!isSignInForm) {
+      // sign-up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(
+                addUser({ uid: uid, email: email, displayName: displayName })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setFireBaseErrorMsg(error.message);
+            });
+        })
+        .catch((error) => {
+          let errorMessage;
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              errorMessage = "The email address is already in use.";
+              break;
+            default:
+              errorMessage = "An error occurred while signing up.";
+          }
+          setFireBaseErrorMsg(errorMessage);
+        });
+    } else {
+      //sign-in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          //console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          let errorMessage;
+          switch (error.code) {
+            case "auth/user-not-found":
+              errorMessage = "No user found with this email address.";
+              break;
+            case "auth/wrong-password":
+              errorMessage = "The password is incorrect.";
+              break;
+            // Add more cases to handle other error codes as needed
+            default:
+              errorMessage = "An error occurred while signing in.";
+          }
+          setFireBaseErrorMsg(errorMessage);
+        });
+    }
   };
 
-  // const MyStyledTextField = {
-  //   '& .MuiInputBase-input': {
-  //   color: '#fff',
-  //   padding: '13.5px 14px',
-  //   background: 'rgb(158 143 143 / 47%)',
-  //   borderRadius: '4px',
-  //   '&:focus': {
-  //     background:"#333", // Focus par background color
-  //   },
-  //   },
-  //   '& .MuiInputLabel-root': {
-  //     color: '#fff',
-  //   },
-  //   '& .MuiFormHelperText-root': {
-  //     color: 'red',
-  //   },
-  // };
-  
   return (
     <>
       <Grid className="netflix-banner">
         <Grid className="netflix-bg">
           <Grid container item xs={12} px={2} lg={10} mx="auto">
             <LoginHeader />
-            <Grid container justifyContent={"center"} mt="5rem" mb={"1rem"}>
-              <Grid item lg={4.2} md={5.2} sm={6.2} xs={12} px={6} py={7} className="login-form">
-                <Typography variant="h4" color="#fff" mb={2}>
+            <Grid
+              container
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{ height: "80vh" }}
+              mb={"1rem"}
+            >
+              <Grid
+                item
+                sx={{ maxWidth: "400px" }}
+                px={6}
+                py={7}
+                className="login-form"
+              >
+                <Typography
+                  variant="h4"
+                  color="#fff"
+                  mb={2}
+                  sx={{ fontSize: { xs: "1.5rem", sm: "2rem" } }}
+                >
                   {isSignInForm ? "Sign In" : "Sign Up"}
                 </Typography>
                 <form onSubmit={(e) => e.preventDefault()}>
@@ -90,7 +160,6 @@ const Login = () => {
                         variant="outlined"
                         inputRef={name}
                         helperText={errorMessage.nameError}
-                       
                       />
                     </Grid>
                   )}
@@ -98,13 +167,11 @@ const Login = () => {
                   <Grid mb={2}>
                     <MyStyledTextField
                       type="text"
-                      
                       label="Email"
                       fullWidth
                       variant="outlined"
                       inputRef={email}
                       helperText={errorMessage.emailError}
-                      
                     />
                   </Grid>
                   <Grid mb={2}>
@@ -115,9 +182,9 @@ const Login = () => {
                       variant="outlined"
                       inputRef={password}
                       helperText={errorMessage.passwordError}
-                      
                     />
                   </Grid>
+                  <Grid color="red">{firebaseErrorMsg}</Grid>
 
                   <Button
                     type="button"
@@ -127,6 +194,7 @@ const Login = () => {
                       mt: "0.6rem",
                       mb: "1.5rem",
                       "&:hover": { background: "#E50914" },
+                      fontSize: { xs: "0.9rem", sm: "initial" },
                     }}
                     fullWidth
                     size="large"

@@ -15,3 +15,5 @@ export const CHILD_URL = "https://occ-0-4857-2186.1.nflxso.net/dnm/api/v6/19OhWN
 export const NETFLIX_DIWALI_URL = "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile-in.png";
 
 export const DEWALI_VIDEO_URL = "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices-in.m4v";
+
+export const AWATAR_URL = "https://avatars.githubusercontent.com/u/6759280?v=4";
