@@ -46,9 +46,7 @@ function NetFlixHeader() {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/")
-      })
+      .then(() => {})
       .catch((error) => {
         navigate("/error")
       });
@@ -61,7 +59,7 @@ function NetFlixHeader() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar position="static">
+      <AppBar position="static" className="netflix-header">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <AdbIcon

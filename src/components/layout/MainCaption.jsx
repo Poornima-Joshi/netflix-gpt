@@ -1,4 +1,4 @@
-import { Box,Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const MainCaption = () => {
   return (
@@ -8,9 +8,11 @@ const MainCaption = () => {
           <Typography
             variant="h1"
             color="#fff"
-            sx={{ fontWeight: "bolder", textAlign: "center",
-            fontSize: { xs: "2rem",  md:"3rem"},
-            fontWeight:{xs:"700",  md:"900"}
+            sx={{
+             
+              textAlign: "center",
+              fontSize: { xs: "2rem", md: "3rem" },
+              fontWeight: { xs: "700", md: "900" },
             }}
           >
             Unlimited movies, TV shows and more
@@ -20,10 +22,10 @@ const MainCaption = () => {
             my={2}
             color="#fff"
             sx={{
-              fontWeight: "bolder",
+              
               textAlign: "center",
-              fontSize: { xs: "1.125rem", lg: "1.5rem"},
-              fontWeight:"400",
+              fontSize: { xs: "1.125rem", lg: "1.5rem" },
+              fontWeight: "400",
             }}
           >
             Watch anywhere.Cancel anytime.
@@ -32,11 +34,11 @@ const MainCaption = () => {
             variant="body1"
             color="#fff"
             sx={{
-                fontWeight: "bolder",
-                textAlign: "center",
-                fontSize: { xs: "1.125rem", lg: "1.5rem"},
-                fontWeight:"400",
-              }}
+              
+              textAlign: "center",
+              fontSize: { xs: "1.125rem", lg: "1.5rem" },
+              fontWeight: "400",
+            }}
           >
             Ready to watch? Enter your email to create or restart your
             membership.

@@ -4,15 +4,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Grid } from "@mui/material";
-import {accordionData} from '../../utils/accordionData';
+import { accordionData } from "../../utils/accordionData";
 
 const NetflixAccordion = () => {
   const [expanded, setExpanded] = useState(false);
   const Data = accordionData;
 
-  const handleChange = (panel) => (event,isExpanded) => {
+  const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -25,7 +25,6 @@ const NetflixAccordion = () => {
           width="100%"
           mb={3}
           sx={{
-            fontWeight: "bolder",
             textAlign: "center",
             fontSize: { xs: "2rem", md: "3rem" },
             fontWeight: { xs: "700", md: "900" },
@@ -33,9 +32,8 @@ const NetflixAccordion = () => {
         >
           Frequently Asked Questions
         </Typography>
-        {
-          Data.map((item)=>(
-            <Accordion
+        {Data.map((item) => (
+          <Accordion
             key={item.id}
             expanded={expanded === item.panel}
             onChange={handleChange(item.panel)}
@@ -43,7 +41,8 @@ const NetflixAccordion = () => {
             className="netflix-accordion"
           >
             <AccordionSummary
-              expandIcon={<AddIcon sx={{fontSize:"30px"}} />}
+            className="accordion-summary"
+              expandIcon={<ExpandMoreIcon sx={{ fontSize: "30px",color:"white" }} />}
               aria-controls={item.ariacontrol}
               id={item.id}
             >
@@ -74,14 +73,11 @@ const NetflixAccordion = () => {
                   fontWeight: "400",
                 }}
               >
-               {item.defination[1]}
+                {item.defination[1]}
               </Typography>
             </AccordionDetails>
-            </Accordion>
-          ))
-        }
-        
-        
+          </Accordion>
+        ))}
       </Grid>
     </Grid>
   );

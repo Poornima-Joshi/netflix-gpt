@@ -19,6 +19,7 @@ const NetFlixChild = () => {
             src={CHILD_URL}
             width={"100%"}
             className="netflix-tv-image"
+            alt="netflix-child"
           />
         </Grid>
         <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>

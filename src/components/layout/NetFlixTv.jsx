@@ -53,6 +53,7 @@ const NetFlixTv = () => {
               src={NETFLIX_TV_URL}
               width={"100%"}
               className="netflix-tv-image"
+              alt="netflix-tv"
             />
           </figure>
         </Grid>

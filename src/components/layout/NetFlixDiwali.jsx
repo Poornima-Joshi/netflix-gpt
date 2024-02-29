@@ -52,6 +52,7 @@ const NetFlixDiwali = () => {
               src={NETFLIX_DIWALI_URL}
               width={"100%"}
               className="netflix-tv-image"
+              alt="netflix-diwali"
             />
           </figure>
         </Grid>

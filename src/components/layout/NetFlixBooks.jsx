@@ -19,6 +19,7 @@ const NetFlixBooks = () => {
             src={NETFLIX_MOBILE_URL}
             width={"100%"}
             className="netflix-tv-image"
+            alt="netflix-books"
           />
         </Grid>
         <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>

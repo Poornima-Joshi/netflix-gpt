@@ -1,7 +1,4 @@
-import Main from "./Main";
-import Login from "../layout/Login";
-import Browse from "./Browse";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase";
@@ -10,36 +7,28 @@ import { addUser, removeUser } from "../../utils/userSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const appRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/browse",
-      element: <Browse />,
-    },
-  ]);
-
+  
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+
+    const unsubscribe =  onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        navigate("/browse")
       } else {
         dispatch(removeUser());
+        navigate("/")
       }
     });
+    //unsubscribe when component unmounts
+    return () => unsubscribe();
   }, []);
 
   return (
     <>
-      <RouterProvider router={appRouter} />
+      <Outlet/>
     </>
   );
 };

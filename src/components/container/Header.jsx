@@ -7,16 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useNavigate } from "react-router-dom";
-
-
+import { Link} from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const handleSignIn = () =>{
-    navigate("/login");
-  }
+  
 
   return (
     <AppBar
@@ -44,7 +38,12 @@ const Header = () => {
         </Typography>
          
          <Grid>
-          <Button variant="contained" color="error" size="small" onClick={handleSignIn}>Sign In</Button>
+         
+          <Button 
+          component= {Link}
+          to="/login"
+           variant="contained" color="error" size="small">Sign In</Button>
+          
         </Grid>
         
          
