@@ -15,3 +15,10 @@
     justify-content:center;
     align-items:center;
 }
+@mixin videoproperty($wid,$bott,$left){
+    position:$absolute;
+    width:$wid;
+    bottom:$bott;
+    left:$left;
+    z-index: 1;
+}

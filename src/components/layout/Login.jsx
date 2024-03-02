@@ -11,8 +11,11 @@ import {
 import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [firebaseErrorMsg, setFireBaseErrorMsg] = useState("");
   const [errorMessage, setErrorMessage] = useState({
@@ -58,6 +61,7 @@ const Login = () => {
 
     //sign-In/sign-Up logic
     if (!isSignInForm) {
+      setIsLoading(true);
       // sign-up logic
       createUserWithEmailAndPassword(
         auth,
@@ -78,6 +82,7 @@ const Login = () => {
             .catch((error) => {
               setFireBaseErrorMsg(error.message);
             });
+          setIsLoading(false);  
         })
         .catch((error) => {
           let errorMessage;
@@ -89,8 +94,10 @@ const Login = () => {
               errorMessage = "An error occurred while signing up.";
           }
           setFireBaseErrorMsg(errorMessage);
+          setIsLoading(false);
         });
     } else {
+      setIsLoading(true);
       //sign-in logic
       signInWithEmailAndPassword(
         auth,
@@ -98,7 +105,7 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
+          setIsLoading(false);
         })
         .catch((error) => {
           let errorMessage;
@@ -114,6 +121,7 @@ const Login = () => {
               errorMessage = "An error occurred while signing in.";
           }
           setFireBaseErrorMsg(errorMessage);
+          setIsLoading(false);
         });
     }
   };
@@ -196,7 +204,11 @@ const Login = () => {
                     size="large"
                     onClick={handleButtonClick}
                   >
-                    {isSignInForm ? "Sign In" : "Sign Up"}
+                    {isLoading ? ( // Loader ka check
+                      <CircularProgress size={24} color="inherit" />
+                    ) : (
+                      isSignInForm ? "Sign In" : "Sign Up" // Button ka text
+                    )}
                   </Button>
                   <Typography variant="p" color="gray">
                     {isSignInForm

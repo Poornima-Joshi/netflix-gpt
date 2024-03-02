@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {AppBar,Box,Toolbar,Typography,Menu,IconButton,Container,Avatar,Button,Tooltip,MenuItem} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -13,18 +13,13 @@ import { useSelector } from "react-redux";
 const pages = ["Home", "TV Show", "Movies", "New & Popular"];
 const settings = ["Profile", "Logout"];
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#1976d2",
-    },
-  },
-});
+
 
 function NetFlixHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
   const navigate = useNavigate();
   const user = useSelector(store => store.user);
 
@@ -57,9 +52,25 @@ function NetFlixHeader() {
     }
   };
 
+  
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
   return (
-    <ThemeProvider theme={darkTheme}>
-      <AppBar position="static" className="netflix-header">
+    
+      <AppBar className={scrolled ? "netflix-header scrolled" : "netflix-header"}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <AdbIcon
@@ -67,6 +78,7 @@ function NetFlixHeader() {
                 display: { xs: "none", md: "flex" },
                 mr: 1,
                 color: "#ec0707",
+                fontSize:{md:"1.7rem"},
               }}
             />
             <Link to="/browse" style={{textDecoration:"none"}}>
@@ -77,9 +89,9 @@ function NetFlixHeader() {
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
-                fontWeight: 700,
+                fontWeight:"bold",
                 letterSpacing: ".3rem",
-
+                fontSize:{md:"1.7rem"},
                 color: "#ec0707",
                 textDecoration: "none",
               }}
@@ -195,7 +207,7 @@ function NetFlixHeader() {
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider>
+   
   );
 }
 
