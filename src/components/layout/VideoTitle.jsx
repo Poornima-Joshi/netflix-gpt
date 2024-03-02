@@ -59,10 +59,11 @@ const VideoTitle = ({ title, overview }) => {
               xs: "small",
             },
             paddingInline:{
-              xs:"0.5rem"
+              xs:"0.5rem",
+             
             },
             paddingBlock:{
-              xs:"0.3rem"
+              xs:"0.3rem",
             }
           }}
         >

@@ -12,7 +12,7 @@ const VideoBackground = ({ movieId }) => {
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
-  const trailerVideo = useSelector(store=> store.movies?.trailerVideo);
+  const trailerVideo = useSelector(store=> store?.movies?.trailerVideo);
   
   useMovieTrailer(movieId);
 

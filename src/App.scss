@@ -103,3 +103,19 @@
 .netflix-header.scrolled {
   background-color:$black;
 }
+
+.movie-list{
+  .movie-scroll{
+    overflow-x: scroll;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width:none;
+  }
+  .caro-icon{
+    @include scrollproperty;
+  }
+  &:hover .caro-icon{
+    display: block;
+  }
+
+}
