@@ -3,12 +3,13 @@ import "./App.scss";
 import Body from "./components/container/Body";
 import Main from "./components/container/Main";
 import Login from "./components/layout/Login";
-//import Browse from "./components/container/Browse";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import appStore from "./utils/appStore";
 import { lazy, Suspense } from "react";
+import BrowseMain from "./components/container/BrowseMain";
 
 const Browse = lazy(()=>import("./components/container/Browse"));
+const GptSearch = lazy(()=>import("./components/container/GptSearch"));
 
 const appRouter = createBrowserRouter([
   {
@@ -30,6 +31,20 @@ const appRouter = createBrowserRouter([
             <Browse />
           </Suspense>
         ),
+        children:[
+          {
+            path:"/browse",
+            element:<BrowseMain/>
+          },
+          {
+            path:"search",
+            element:(
+              <Suspense>
+                <GptSearch/>
+              </Suspense>
+            )
+          }
+        ]
       },
     ],
   },

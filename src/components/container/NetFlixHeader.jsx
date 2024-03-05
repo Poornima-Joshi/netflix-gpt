@@ -8,6 +8,7 @@ import { auth } from "../../utils/firebase";
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 const pages = ["Home", "TV Show", "Movies", "New & Popular"];
@@ -146,8 +147,8 @@ function NetFlixHeader() {
             <Typography
               variant="h5"
               noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
+              component={Link}
+              to="/browse"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -159,7 +160,7 @@ function NetFlixHeader() {
                 textDecoration: "none",
               }}
             >
-              NETFLIXGPT
+              NETFLIX GPT
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
@@ -172,7 +173,9 @@ function NetFlixHeader() {
                 </Button>
               ))}
             </Box>
-
+            <Button component={Link} to="search" variant="text" startIcon={<SearchIcon />} sx={{color:"#fff",mr:"10px"}}>
+              Search
+             </Button>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>

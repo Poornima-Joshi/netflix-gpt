@@ -10,11 +10,11 @@ import { CardActionArea } from '@mui/material';
 
 const MovieCard = ({posterPath,title}) => {
   return (
-    <Card sx={{ maxWidth:{md:"140px",sm:"120px",xs:"100px"},transition:"1s","&:hover":{transform: "scale(0.95)",transition:"1s"}}}>
+    <Card sx={{ maxWidth:{md:"140px",sm:"120px",xs:"70px"},transition:"1s","&:hover":{transform: "scale(0.95)",transition:"1s"}}}>
       <CardActionArea>
         <CardMedia
           component="img"
-          sx={{width:{md:"140px",sm:"120px",xs:"100px"}}}
+          sx={{width:{md:"140px",sm:"120px",xs:"70px"}}}
           // height="140"
           image={IMG_CDN_URL+posterPath}
           alt={title}

@@ -27,7 +27,15 @@
 - Playing for main container and secondary container
 - Fetch data for trailer video data
 - Embedded the youtube video and make it autoplay and mute
-
+- Build Secondary component
+- Build Movie List 
+- build movie card
+- tmdm image cdn url
+- made the browsre page amazing with tailwind css
+- usePopularMovies custom hook
+- gpt serach bar
+- gpt search page
+- (Bouns) multi-lang feature in app
 
 # Features
 - Login/Sign Up
