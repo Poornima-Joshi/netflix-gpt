@@ -38,7 +38,9 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
+    if (searchText.current.value.trim().length === 0) {
+      return alert("Please enter a search query before clicking search.");
+    }
     //make an api call to gpt api and get movie Results
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query :" +
@@ -50,7 +52,7 @@ const GptSearchBar = () => {
       model: "gpt-3.5-turbo",
     });
     if (!gptResults?.choices) {
-      return console.log("this movie is not avaliable");
+      return alert("this movie is not avaliable");
     }
     const gptMovies = gptResults?.choices?.[0]?.message?.content?.split(",");
     //for each movie i will search TMDB api
