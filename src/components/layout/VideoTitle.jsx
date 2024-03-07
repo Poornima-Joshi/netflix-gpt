@@ -23,7 +23,7 @@ const VideoTitle = ({ title, overview }) => {
           py={0.2}
           sx={{
             wordSpacing: "-5px",
-            fontSize: { xs: "1.7rem", sm: "2rem", md: "2.7rem" },
+            fontSize: { xs: "1rem", sm: "1.6rem", md: "2rem",lg:"2.3rem" },
             fontWeight: "900",
             textShadow: "1px 1px 1px black",
           }}

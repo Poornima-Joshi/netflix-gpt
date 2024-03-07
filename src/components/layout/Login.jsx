@@ -12,6 +12,7 @@ import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import CircularProgress from '@mui/material/CircularProgress';
+import Footer from "../container/Footer";
 
 
 const Login = () => {
@@ -128,8 +129,8 @@ const Login = () => {
 
   return (
     <>
-      <Grid className="netflix-banner">
-        <Grid className="netflix-bg">
+      <Grid className="login-Banner">
+        <Grid className="login-bg">
           <Grid container item xs={12} px={2} lg={10} mx="auto">
             <LoginHeader />
             <Grid
@@ -233,6 +234,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Footer/>
     </>
   );
 };

@@ -7,30 +7,68 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {Stack } from "@mui/system";
+import { Stack } from "@mui/system";
 import lang from "../../utils/languageConstants";
-import { SUPPORTED_LANGUAGES } from "../../utils/constants";
+import { API_OPTIONS, SUPPORTED_LANGUAGES } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../utils/configSlice";
+import { useRef } from "react";
+import openai from "../../utils/openaikey";
+import { addGptMovieResult } from "../../utils/gptSlice";
 
 const GptSearchBar = () => {
-
-  const langKey = useSelector((store)=>store.config.lang);
+  const searchText = useRef(null);
+  const langKey = useSelector((store) => store.config.lang);
   const dispatch = useDispatch();
 
-  const handleLangChange = (e) =>{
-    dispatch(changeLanguage(e.target.value))
-  }
+  const handleLangChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
+  //search movie in TMDB
+  const searchMovieTMDM = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    );
+    const json = await data?.json();
+    return json?.results;
+  };
+
+  const handleGptSearchClick = async () => {
+    console.log(searchText.current.value);
+    //make an api call to gpt api and get movie Results
+    const gptQuery =
+      "Act as a Movie Recommendation system and suggest some movies for the query :" +
+      searchText.current.value +
+      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar,Sholay,Don,Golmaal,Koi mil gaya";
+
+    const gptResults = await openai.chat.completions.create({
+      messages: [{ role: "user", content: gptQuery }],
+      model: "gpt-3.5-turbo",
+    });
+    if (!gptResults?.choices) {
+      return console.log("this movie is not avaliable");
+    }
+    const gptMovies = gptResults?.choices?.[0]?.message?.content?.split(",");
+    //for each movie i will search TMDB api
+    const promiseArray = gptMovies?.map((movie)=> searchMovieTMDM(movie));
+    const tmdbResults = await Promise.all(promiseArray);
+    dispatch(addGptMovieResult({movieNames:gptMovies,movieResults:tmdbResults}));
+  };
 
   return (
     <Grid
-      sx={{ mt: { sm: "6rem", xs: "3.5rem" } }}
+      sx={{ mt: { sm: "6rem", xs: "3.5rem" }}}
       container
       item
       xs={12}
       md={10}
       p={3}
       mx="auto"
+      
     >
       <Typography
         variant="h3"
@@ -41,6 +79,7 @@ const GptSearchBar = () => {
         sx={{
           fontSize: { sm: "1.7rem", md: "2.5rem", xs: "1.3rem" },
           fontWeight: { md: 900, sm: 800, xs: 800 },
+          
         }}
       >
         Let AI be your Movie Guru!
@@ -58,9 +97,10 @@ const GptSearchBar = () => {
         Discover Family-Friendly Flicks for a Perfect Movie Night
       </Typography>
 
-      <form style={{ width: "100%" }}>
-        <Stack direction="row" spacing={1}>
+      <form style={{ width: "100%"}} >
+        <Stack direction="row" spacing={1} >
           <TextField
+            inputRef={searchText}
             label="search"
             focused
             fullWidth
@@ -72,21 +112,22 @@ const GptSearchBar = () => {
             }}
           />
 
-          <FormControl  focused>
-            <Select inputProps={{ "aria-label": "Without label" }}  
-             onChange={handleLangChange}
-             value={langKey}
-            sx={{
-              "& .MuiSelect-select": {
-                color: "#fff",
-              },
-            }}>
-              {
-                SUPPORTED_LANGUAGES.map((lang)=>(
-                  <MenuItem key={lang.identifier} value={lang.identifier}>{lang.name}</MenuItem>
-             
-                ))
-              }
+          <FormControl focused>
+            <Select
+              inputProps={{ "aria-label": "Without label" }}
+              onChange={handleLangChange}
+              value={langKey}
+              sx={{
+                "& .MuiSelect-select": {
+                  color: "#fff",
+                },
+              }}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <MenuItem key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -97,6 +138,7 @@ const GptSearchBar = () => {
               "&:hover": { background: "#E50914" },
             }}
             type="button"
+            onClick={handleGptSearchClick}
           >
             {lang[langKey].search}
           </Button>

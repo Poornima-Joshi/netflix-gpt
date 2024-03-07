@@ -10,6 +10,7 @@ const GptSearch = () => {
         backgroundColor: "#000", // Start with black
         backgroundImage:
           "linear-gradient(315deg, rgba(0,0,0,0.35) 0%, #2234ae 40%, rgba(0,0,0,0.35) 100%)",
+          height:"100vh"
       }}
     >
       <GptSearchBar />

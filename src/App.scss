@@ -2,6 +2,18 @@
 @import "./sass/variable";
 @import "./sass/mixin";
 
+.login-Banner{
+  @include loginLayout;
+  background-image: url($BANNER_URL);
+  background-size: cover;
+  background-color:black;
+
+  .login-bg{
+    @include loginLayout;
+    background-image: $liner-gradient
+  }
+}
+
 .netflix-banner {
   @include netflixLayout;
   background-image: url($BANNER_URL);
@@ -106,10 +118,8 @@
 
 .movie-list{
   .movie-scroll{
+    @include scrollbehaviour;
     overflow-x: scroll;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    scrollbar-width:none;
   }
   .caro-icon{
     @include scrollproperty;
@@ -117,5 +127,11 @@
   &:hover .caro-icon{
     display: block;
   }
-
 }
+
+// .gpt-movies{
+//   @include scrollbehaviour;
+//   overflow-y: scroll;
+//   border: 1px solid red;
+//   height:50vh;
+// }

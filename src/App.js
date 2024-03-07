@@ -7,8 +7,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import appStore from "./utils/appStore";
 import { lazy, Suspense } from "react";
 import BrowseMain from "./components/container/BrowseMain";
+import Browse from "./components/container/Browse";
 
-const Browse = lazy(()=>import("./components/container/Browse"));
+
+//const Browse = lazy(()=>import("./components/container/Browse"));
 const GptSearch = lazy(()=>import("./components/container/GptSearch"));
 
 const appRouter = createBrowserRouter([
@@ -27,9 +29,9 @@ const appRouter = createBrowserRouter([
       {
         path: "/browse",
         element: (
-          <Suspense>
+         
             <Browse />
-          </Suspense>
+         
         ),
         children:[
           {

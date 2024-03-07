@@ -51,3 +51,4 @@
 - NetflixGPT
       - Search Bar
       - Movie Suggestions
+

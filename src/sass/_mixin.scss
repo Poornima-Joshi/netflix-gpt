@@ -4,6 +4,10 @@
 @mixin netflixLayout{
     height:$h-screen;
     width:$w-full;
+}
+@mixin loginLayout{
+    height:$h-screen;
+    width:$w-full;
     overflow-y: $auto;
     &::-webkit-scrollbar{
         display:$d-none;
@@ -33,4 +37,10 @@
     opacity:0.8;
     cursor: pointer;
     display:none;
+}
+
+@mixin scrollbehaviour{
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width:none;
 }
