@@ -5,7 +5,6 @@ import Main from "./components/container/Main";
 import Login from "./components/layout/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import appStore from "./utils/appStore";
-import { lazy, Suspense } from "react";
 import BrowseMain from "./components/container/BrowseMain";
 import Browse from "./components/container/Browse";
 import GptSearch from "./components/container/GptSearch";

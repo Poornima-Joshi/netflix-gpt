@@ -3,7 +3,6 @@ import {AppBar,Box,Toolbar,Typography,Menu,IconButton,Container,Avatar,Button,To
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import { AWATAR_URL } from "../../utils/constants";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { auth } from "../../utils/firebase";
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";

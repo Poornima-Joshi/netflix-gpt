@@ -3,11 +3,8 @@ import LoginHeader from "../container/LoginHeader";
 import { useState, useRef, useEffect } from "react";
 import { checkSignInData, checkSignUpData } from "../../utils/validate";
 import { MyStyledTextField } from "../../utils/customStyled";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword,
+updateProfile} from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";

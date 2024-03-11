@@ -4,15 +4,16 @@ import VideoBackground from "../layout/VideoBackground";
 import VideoTitle from "../layout/VideoTitle";
 import MainContainerShimmer from "../layout/MainContainerShimmer";
 
-
+const movieNum = Math.floor(Math.random()*20);
 const MainContainer = () => {
    const movies = useSelector(store => store.movies?.nowPlayingMovies);
     
    if(!movies){
     return <MainContainerShimmer/>
    };
-
-   const mainMovie = movies[15];
+   
+   
+   const mainMovie = movies[movieNum];
    const {original_title,overview,id} = mainMovie;
 
   return (
