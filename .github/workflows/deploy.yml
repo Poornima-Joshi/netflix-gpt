@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,7 +16,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -27,6 +27,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Debug Environment Variables
+        run: |
+          echo "OpenAI Key: ${{ secrets.OPENAI_KEY }}"
+          echo "TMDB Key: ${{ secrets.REACT_APP_TMDB_KEY }}"
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
