@@ -39,6 +39,7 @@ jobs:
       - name: Build
         env:
             REACT_APP_OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+            REACT_APP_TMDB_KEY:  ${{ secrets.REACT_APP_TMDB_KEY }}
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v3
