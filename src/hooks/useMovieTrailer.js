@@ -25,6 +25,7 @@ const useMovieTrailer = (movieId) => {
       console.error('Error fetching movie trailer:', error)
     }
   };
+  
   useEffect(() => {
    !trailerVideo && getMovieVideos();
   }, []);
